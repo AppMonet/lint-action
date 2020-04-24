@@ -10,10 +10,12 @@ const Stylelint = require("./stylelint");
 const SwiftFormat = require("./swiftformat");
 const SwiftLint = require("./swiftlint");
 const XO = require("./xo");
+const Infer = require("./infer");
 
 const linters = {
 	// Linters
 	eslint: ESLint,
+	infter: Infer,
 	flake8: Flake8,
 	golint: Golint,
 	mypy: Mypy,

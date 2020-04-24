@@ -34,6 +34,20 @@ inputs:
     required: false
     default: ""
 
+  # infer
+  infer:
+    description: enable or disable infer
+    required: false
+    default: false
+  infer_args:
+    description: command to run with infer
+    required: false
+    default: ""
+  infer_extensions:
+    description: Extensions of files to check with infer
+    required: false
+    default: "m,h"
+
   # Go
 
   gofmt:
