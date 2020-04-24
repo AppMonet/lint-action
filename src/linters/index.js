@@ -15,7 +15,7 @@ const Infer = require("./infer");
 const linters = {
 	// Linters
 	eslint: ESLint,
-	infter: Infer,
+	infer: Infer,
 	flake8: Flake8,
 	golint: Golint,
 	mypy: Mypy,

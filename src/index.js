@@ -56,10 +56,12 @@ async function runAction() {
 	}
 
 	const checks = [];
+	log("checking linters... going to run");
 
 	// Loop over all available linters
 	for (const [linterId, linter] of Object.entries(linters)) {
 		// Determine whether the linter should be executed on the commit
+		log("checking for: " + linterId);
 		if (getInput(linterId) === "true") {
 			const fileExtensions = getInput(`${linterId}_extensions`, true);
 			const args = getInput(`${linterId}_args`) || "";

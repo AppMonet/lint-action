@@ -23,6 +23,7 @@ class Infer {
   }
 
   static lint(dir, extensions, args = "", fix = false, prefix = "") {
+    console.info("running infer in directory: ", dir);
     return run(`infer run -- ${args}`, {
       dir,
       ignoreErrors: true
