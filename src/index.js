@@ -87,10 +87,10 @@ async function runAction() {
 				lintDirAbs,
 				ignoreErrors:true
 			});
-			console.info("ls output : " + ls.stdout);
-			console.info("infer status: " + lintOutput.status);
-			console.info("infer output: " + lintOutput.stdout);
-			console.info("infer error: " + lintOutput.stderr);
+			log("ls output : " + ls.stdout);
+			log("infer status: " + lintOutput.status);
+			log("infer output: " + lintOutput.stdout);
+			log("infer error: " + lintOutput.stderr);
 			// Parse output of linting command
 			setTimeout(function () {
 				const lintResult = linter.parseOutput(context.workspace, lintOutput);
