@@ -1,11 +1,11 @@
-const { join } = require("path");
+const {join} = require("path");
 
 const git = require("./git");
-const { createCheck } = require("./github/api");
-const { getContext } = require("./github/context");
+const {createCheck} = require("./github/api");
+const {getContext} = require("./github/context");
 const linters = require("./linters");
-const { getInput, log } = require("./utils/action");
-const { getSummary } = require("./utils/lint-result");
+const {getInput, log} = require("./utils/action");
+const {getSummary} = require("./utils/lint-result");
 
 const GIT_EMAIL = "lint-action@samuelmeuli.com";
 const GIT_NAME = "Lint Action";
@@ -85,19 +85,22 @@ async function runAction() {
 			const lintOutput = linter.lint(lintDirAbs, fileExtList, args, autoFix, prefix);
 
 			// Parse output of linting command
-			const lintResult = linter.parseOutput(context.workspace, lintOutput);
-			const summary = getSummary(lintResult);
-			log(`${linter.name} found ${summary} (${lintResult.isSuccess ? "success" : "failure"})`);
+			setTimeout(function () {
+				const lintResult = linter.parseOutput(context.workspace, lintOutput);
+				const summary = getSummary(lintResult);
+				log(`${linter.name} found ${summary} (${lintResult.isSuccess ? "success" : "failure"})`);
 
-			if (autoFix) {
-				// Commit and push auto-fix changes
-				if (git.hasChanges()) {
-					git.commitChanges(commitMsg.replace(/\${linter}/g, linter.name));
-					git.pushChanges();
+				if (autoFix) {
+					// Commit and push auto-fix changes
+					if (git.hasChanges()) {
+						git.commitChanges(commitMsg.replace(/\${linter}/g, linter.name));
+						git.pushChanges();
+					}
 				}
-			}
 
-			checks.push({ checkName: linter.name, lintResult, summary });
+				checks.push({checkName: linter.name, lintResult, summary});
+			}, 5000);
+
 		}
 	}
 
@@ -107,7 +110,7 @@ async function runAction() {
 	log(""); // Create empty line in logs
 	const headSha = git.getHeadSha();
 	await Promise.all(
-		checks.map(({ checkName, lintResult, summary }) =>
+		checks.map(({checkName, lintResult, summary}) =>
 			createCheck(checkName, headSha, context, lintResult, summary),
 		),
 	);
