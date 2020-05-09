@@ -24,7 +24,9 @@ class Infer {
 
   static lint(dir, extensions, args = "", fix = false, prefix = "") {
     console.info("running infer in directory: ", dir);
-    return run(`infer run -- ${args}`, {
+    const command = `infer run -- ${args}`;
+		console.info("running command: ", command);
+		return run(command, {
       dir,
       ignoreErrors: true
     });
@@ -35,10 +37,10 @@ class Infer {
   		dir,
 			ignoreErrors:true
 		});
-  	console.log("ls output : " + ls.stdout);
-  	// console.log("infer status: " + output.status);
-  	// console.log("infer output: " + output.stdout);
-  	// console.log("infer error: " + output.stderr);
+  	console.info("ls output : " + ls.stdout);
+  	console.info("infer status: " + output.status);
+  	console.info("infer output: " + output.stdout);
+  	console.info("infer error: " + output.stderr);
     // we just want to get the output json file from the directory
     const outputFile = path.join(dir, 'infer-out', 'report.json');
     const lintResult = initLintResult();
