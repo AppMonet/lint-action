@@ -31,7 +31,7 @@ class Infer {
   }
 
   static parseOutput(dir, output) {
-  	const ls = run(`ls -alrt`, {
+  	const ls = run(`ls`, {
   		dir,
 			ignoreErrors:true
 		});
