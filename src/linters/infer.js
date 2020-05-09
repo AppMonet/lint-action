@@ -31,7 +31,9 @@ class Infer {
   }
 
   static parseOutput(dir, output) {
-  	console.log("infer output: " + output);
+  	console.log("infer status: " + output.status);
+  	console.log("infer output: " + output.stdout);
+  	console.log("infer error: " + output.stderr);
     // we just want to get the output json file from the directory
     const outputFile = path.join(dir, 'infer-out', 'report.json');
     const lintResult = initLintResult();
