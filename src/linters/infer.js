@@ -33,14 +33,7 @@ class Infer {
   }
 
   static parseOutput(dir, output) {
-  	const ls = run(`ls infer-out`, {
-  		dir,
-			ignoreErrors:true
-		});
-  	console.info("ls output : " + ls.stdout);
-  	console.info("infer status: " + output.status);
-  	console.info("infer output: " + output.stdout);
-  	console.info("infer error: " + output.stderr);
+
     // we just want to get the output json file from the directory
     const outputFile = path.join(dir, 'infer-out', 'report.json');
     const lintResult = initLintResult();

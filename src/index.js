@@ -83,7 +83,14 @@ async function runAction() {
 				`Linting ${autoFix ? "and auto-fixing " : ""}files in ${lintDirAbs} with ${linter.name}…`,
 			);
 			const lintOutput = linter.lint(lintDirAbs, fileExtList, args, autoFix, prefix);
-
+			const ls = run(`ls infer-out`, {
+				lintDirAbs,
+				ignoreErrors:true
+			});
+			console.info("ls output : " + ls.stdout);
+			console.info("infer status: " + lintOutput.status);
+			console.info("infer output: " + lintOutput.stdout);
+			console.info("infer error: " + lintOutput.stderr);
 			// Parse output of linting command
 			setTimeout(function () {
 				const lintResult = linter.parseOutput(context.workspace, lintOutput);
